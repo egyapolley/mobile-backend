@@ -18,13 +18,9 @@ mongoose.connect("mongodb://localhost/mobile-app", {
     app.use(express.urlencoded({extended: false}));
 
 
-    let PORT = process.env.PORT || 5200;
-    let HOST = process.env.PROD_HOST;
+    let PORT = process.env.PORT || 5001;
+    let HOST = process.env.NODE_ENV === "development"?process.env.TEST_HOST:process.env.PROD_HOST
 
-    if (process.env.NODE_ENV === "development") {
-        HOST = process.env.TEST_HOST;
-        app.use(morgan("combined"))
-    }
 
     app.use(router);
 
